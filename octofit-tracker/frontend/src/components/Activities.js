@@ -31,32 +31,89 @@ function Activities() {
       });
   }, []);
 
-  if (loading) return <div className="container mt-4"><p>Loading activities...</p></div>;
-  if (error) return <div className="container mt-4"><p className="text-danger">Error: {error}</p></div>;
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <h4 className="alert-heading">Error!</h4>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Activities</h2>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Activity Type</th>
-            <th>Duration (min)</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {activities.map((activity, index) => (
-            <tr key={activity._id || activity.id || index}>
-              <td>{activity.user?.username || activity.user}</td>
-              <td>{activity.activity_type}</td>
-              <td>{activity.duration}</td>
-              <td>{new Date(activity.date).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      <div className="page-header d-flex justify-content-between align-items-center">
+        <h2><span role="img" aria-label="activities">📊</span> Activities</h2>
+        <button className="btn btn-primary">
+          <span role="img" aria-label="add">➕</span> Add Activity
+        </button>
+      </div>
+      
+      <div className="card">
+        <div className="card-header">
+          <h5 className="mb-0">Activity Log</h5>
+        </div>
+        <div className="card-body p-0">
+          <div className="table-responsive">
+            <table className="table table-striped table-hover mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Activity Type</th>
+                  <th scope="col">Duration (min)</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activities.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="text-center py-4 text-muted">
+                      No activities found. Start tracking your fitness journey!
+                    </td>
+                  </tr>
+                ) : (
+                  activities.map((activity, index) => (
+                    <tr key={activity._id || activity.id || index}>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        <span className="badge bg-secondary">
+                          {activity.user?.username || activity.user}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="badge bg-info text-dark">
+                          {activity.activity_type}
+                        </span>
+                      </td>
+                      <td>{activity.duration} min</td>
+                      <td>{new Date(activity.date).toLocaleDateString()}</td>
+                      <td>
+                        <button className="btn btn-sm btn-outline-primary me-1">Edit</button>
+                        <button className="btn btn-sm btn-outline-danger">Delete</button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="card-footer text-muted">
+          Total Activities: {activities.length}
+        </div>
+      </div>
     </div>
   );
 }

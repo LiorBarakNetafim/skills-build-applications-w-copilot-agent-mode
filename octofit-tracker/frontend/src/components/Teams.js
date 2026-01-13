@@ -31,30 +31,83 @@ function Teams() {
       });
   }, []);
 
-  if (loading) return <div className="container mt-4"><p>Loading teams...</p></div>;
-  if (error) return <div className="container mt-4"><p className="text-danger">Error: {error}</p></div>;
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <h4 className="alert-heading">Error!</h4>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Teams</h2>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Team Name</th>
-            <th>Members</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div>
+      <div className="page-header d-flex justify-content-between align-items-center">
+        <h2><span role="img" aria-label="teams">👥</span> Teams</h2>
+        <button className="btn btn-primary">
+          <span role="img" aria-label="add">➕</span> Create Team
+        </button>
+      </div>
+      
+      {teams.length === 0 ? (
+        <div className="alert alert-info" role="alert">
+          No teams found. Create a team to get started!
+        </div>
+      ) : (
+        <div className="row">
           {teams.map((team, index) => (
-            <tr key={team._id || team.id || index}>
-              <td>{team.name}</td>
-              <td>
-                {team.members?.map(member => member.username || member).join(', ') || 'No members'}
-              </td>
-            </tr>
+            <div className="col-md-6 col-lg-4 mb-4" key={team._id || team.id || index}>
+              <div className="card h-100">
+                <div className="card-header">
+                  <h5 className="mb-0">
+                    <span role="img" aria-label="team">👥</span> {team.name}
+                  </h5>
+                </div>
+                <div className="card-body">
+                  <h6 className="card-subtitle mb-3 text-muted">Team Members</h6>
+                  {team.members && team.members.length > 0 ? (
+                    <div className="d-flex flex-wrap gap-2">
+                      {team.members.map((member, memberIndex) => (
+                        <span key={memberIndex} className="badge bg-primary">
+                          {member.username || member}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-muted mb-0">No members yet</p>
+                  )}
+                </div>
+                <div className="card-footer">
+                  <div className="d-flex justify-content-between">
+                    <button className="btn btn-sm btn-outline-primary">
+                      View Details
+                    </button>
+                    <button className="btn btn-sm btn-success">
+                      Join Team
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      )}
+      
+      <div className="card mt-4">
+        <div className="card-footer text-muted">
+          Total Teams: {teams.length}
+        </div>
+      </div>
     </div>
   );
 }

@@ -31,30 +31,94 @@ function Leaderboard() {
       });
   }, []);
 
-  if (loading) return <div className="container mt-4"><p>Loading leaderboard...</p></div>;
-  if (error) return <div className="container mt-4"><p className="text-danger">Error: {error}</p></div>;
+  const getRankBadge = (rank) => {
+    if (rank === 1) return <span className="badge bg-warning text-dark">🥇 1st</span>;
+    if (rank === 2) return <span className="badge bg-secondary">🥈 2nd</span>;
+    if (rank === 3) return <span className="badge bg-danger">🥉 3rd</span>;
+    return <span className="badge bg-light text-dark">{rank}th</span>;
+  };
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <h4 className="alert-heading">Error!</h4>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Leaderboard</h2>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>User</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboard.map((entry, index) => (
-            <tr key={entry._id || entry.id || index}>
-              <td>{index + 1}</td>
-              <td>{entry.user?.username || entry.user}</td>
-              <td>{entry.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      <div className="page-header">
+        <h2><span role="img" aria-label="trophy">🏆</span> Leaderboard</h2>
+      </div>
+      
+      <div className="card">
+        <div className="card-header bg-warning text-dark">
+          <h5 className="mb-0">🏆 Top Performers</h5>
+        </div>
+        <div className="card-body p-0">
+          <div className="table-responsive">
+            <table className="table table-striped table-hover mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                {leaderboard.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="text-center py-4 text-muted">
+                      No leaderboard entries yet. Start competing!
+                    </td>
+                  </tr>
+                ) : (
+                  leaderboard.map((entry, index) => (
+                    <tr key={entry._id || entry.id || index} className={index < 3 ? 'table-active' : ''}>
+                      <td>{getRankBadge(index + 1)}</td>
+                      <td>
+                        <strong>{entry.user?.username || entry.user}</strong>
+                      </td>
+                      <td>
+                        <span className="badge bg-success fs-6">{entry.score} pts</span>
+                      </td>
+                      <td style={{ width: '30%' }}>
+                        <div className="progress" style={{ height: '20px' }}>
+                          <div 
+                            className="progress-bar bg-success" 
+                            role="progressbar" 
+                            style={{ width: `${Math.min((entry.score / (leaderboard[0]?.score || 1)) * 100, 100)}%` }}
+                            aria-valuenow={entry.score}
+                            aria-valuemin="0"
+                            aria-valuemax={leaderboard[0]?.score || 100}
+                          >
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="card-footer text-muted">
+          Total Participants: {leaderboard.length}
+        </div>
+      </div>
     </div>
   );
 }

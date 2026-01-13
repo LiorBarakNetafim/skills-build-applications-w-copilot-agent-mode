@@ -1,38 +1,409 @@
+/* OctoFit Tracker - Main Styles with Vibrant Colors */
+
+:root {
+  --primary-color: #6f42c1;
+  --secondary-color: #20c997;
+  --accent-color: #fd7e14;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --dark-color: #343a40;
+  --light-color: #f8f9fa;
+  --gradient-primary: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+  --gradient-secondary: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  --gradient-accent: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+}
+
+/* Navbar Styling - Purple Gradient */
+.navbar {
+  background: var(--gradient-primary) !important;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+  padding: 0.8rem 0;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #fff !important;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 40px;
+  width: auto;
+  margin-right: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  border-radius: 5px;
+  padding: 8px 12px !important;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Card Styling - Colorful Headers */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(111, 66, 193, 0.2);
+}
+
+.card-header {
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: 0 !important;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+}
+
+.card-header.bg-warning {
+  background: var(--gradient-accent) !important;
+  color: #212529;
+}
+
+.card-header h4,
+.card-header h5 {
+  margin: 0;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Table Styling - Colorful Headers */
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #6f42c1 0%, #7952b3 100%);
+  color: #fff;
+  border-bottom: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(111, 66, 193, 0.08);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(111, 66, 193, 0.03);
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  padding: 0.875rem;
+}
+
+/* Button Styling - Vibrant Colors */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5a32a3 0%, #d63384 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.5);
+}
+
+.btn-success {
+  background: var(--gradient-secondary);
+  border: none;
+  box-shadow: 0 4px 15px rgba(32, 201, 151, 0.4);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #1aa179 0%, #138496 100%);
+  transform: translateY(-3px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #c82333 0%, #a71d2a 100%);
+  transform: translateY(-3px);
+}
+
+.btn-outline-primary {
+  color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+.btn-outline-primary:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn-light {
+  background-color: #fff;
+  color: #6f42c1;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-light:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-3px);
+}
+
+.btn-outline-light {
+  border-width: 2px;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Loading and Error States */
+.spinner-border {
+  color: #6f42c1 !important;
+}
+
+.alert {
+  border-radius: 12px;
+  border: none;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+  color: #0c5460;
+}
+
+/* Page Headers */
+.page-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #6f42c1;
+}
+
+.page-header h2 {
+  color: #6f42c1;
+  font-weight: 700;
+}
+
+/* Badge Styling - Colorful */
+.badge {
+  font-weight: 600;
+  padding: 0.5em 0.85em;
+  border-radius: 6px;
+}
+
+.badge.bg-primary {
+  background: var(--gradient-primary) !important;
+}
+
+.badge.bg-success {
+  background: var(--gradient-secondary) !important;
+}
+
+.badge.bg-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+  color: #fff !important;
+}
+
+.badge.bg-secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%) !important;
+}
+
+/* Home Page Styling - Vibrant Hero */
+.home-hero {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 40px rgba(111, 66, 193, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  transform: rotate(30deg);
+}
+
+.home-hero h1 {
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.home-hero .lead {
+  opacity: 0.95;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.feature-card .display-4 {
+  font-size: 4rem;
+}
+
+.feature-card .card-title {
+  color: #6f42c1;
+  font-weight: 700;
+}
+
+/* Leaderboard Specific - Gold/Silver/Bronze */
+.rank-badge {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-.App-link {
-  color: #61dafb;
+.rank-1, .badge.bg-warning {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%) !important;
+  color: #000;
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.rank-2 {
+  background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+  color: #000;
+  box-shadow: 0 3px 10px rgba(192, 192, 192, 0.4);
+}
+
+.rank-3 {
+  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(205, 127, 50, 0.4);
+}
+
+/* Progress Bar Styling */
+.progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: var(--gradient-secondary);
+  border-radius: 10px;
+}
+
+/* Link Styling */
+a {
+  color: #6f42c1;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #e83e8c;
+}
+
+/* Footer Styling */
+footer {
+  background: linear-gradient(135deg, #343a40 0%, #212529 100%) !important;
+}
+
+footer p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Avatar Circle */
+.bg-primary.rounded-circle {
+  background: var(--gradient-primary) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 2rem 1rem;
+    border-radius: 15px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .table-responsive {
+    font-size: 0.9rem;
+  }
+  
+  .navbar-brand img {
+    height: 32px;
   }
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6f42c1 0%, #e83e8c 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5a32a3 0%, #d63384 100%);
+}
+
